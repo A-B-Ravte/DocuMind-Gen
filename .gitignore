@@ -18,6 +18,9 @@ outputs/
 *.bin
 *.pth
 
+#sample documents
+Sample-Doc/
+
 # IDE
 .vscode/
 .idea/
