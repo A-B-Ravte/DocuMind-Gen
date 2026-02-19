@@ -21,20 +21,16 @@ class DocOperation():
             if not box or box == [0,0,0,0]:
                 continue
 
-            
-            if not box or box==[0,0,0,0]:
-                return
-            
             page = doc[page_no - 1]
-            y, x, y1, x1 = box
+            ymin, xmin, ymax, xmax = box
 
             r = page.rect
 
             rect = fitz.Rect(
-                (x/1000) * r.width,
-                (y/1000) * r.height - 3,
-                (x1/1000) * r.width,
-                (y1/1000) * r.height
+                (xmin/1000) * r.width,
+                (ymin/1000) * r.height - 3,
+                (xmax/1000) * r.width,
+                (ymax/1000) * r.height
             )
 
             page.draw_rect(rect, color=(1,0,0), width=1)
