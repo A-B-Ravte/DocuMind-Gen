@@ -1,4 +1,5 @@
 import os
+import pathlib
 from dotenv import load_dotenv
 from google import genai
 from pydantic import BaseModel, Field
@@ -35,6 +36,7 @@ if not doc_ops.is_digital_native(pdf_path = pdf_path):
     Extract and give each page name and address and provide page number and bounding box for each.
     """
 
+    '''
     document = client.files.upload(file = pdf_path)
     response = client.models.generate_content(
         model = 'gemini-2.5-flash',
@@ -47,6 +49,20 @@ if not doc_ops.is_digital_native(pdf_path = pdf_path):
     )
     
     client.files.delete(name=document.name)
+    '''
+    # Read the file as bytes
+    file_path = pathlib.Path(pdf_path)
+    file_data = file_path.read_bytes()
+
+    # Send directly as 'inline_data'
+    response = client.models.generate_content(
+        model='gemini-2.5-flash',
+        contents=[
+            prompt,
+            {'inline_data': {'data': file_data, 'mime_type': 'application/pdf'}}
+        ],
+        config={'response_mime_type': 'application/json', 'response_schema': InvoiceModel}
+    )
 
     doc = InvoiceModel.model_validate_json(response.text)
     print(doc.model_dump())
