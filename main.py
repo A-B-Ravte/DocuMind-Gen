@@ -8,7 +8,7 @@ doc_ops = DocOperation()
 load_dotenv()
 
 class Fields(BaseModel):
-    BoundingBox : list[int] = Field(..., description="Get bBounding box of where the information found.")
+    BoundingBox : list[int] = Field(..., description="Get Bounding box of where the information found.")
     Page_No : int = Field(..., description="Get page number where there information found")
 
 class NameField(Fields):
@@ -22,14 +22,14 @@ class InvoiceModel(BaseModel):
     Address : AddressField
     
 
-pdf_path = r'D:\aakash\SwitchFocus\Own_Project\DocuMind-Gen\Sample-Doc\Alfa_1.jpg'
+pdf_path = r'D:\aakash\SwitchFocus\Own_Project\DocuMind-Gen\Sample-Doc\7. Indra Engineering.pdf'
 
 if not doc_ops.is_digital_native(pdf_path = pdf_path):
     client = genai.Client()
 
     prompt = """"
     Extract the multi page document and get the Name and Address fields, 
-    Document provided can have single page or multi page both in jpg, jpeg, png or pdf formats
+    Document provided can have single page or multiple page both in jpg, jpeg, png or pdf formats
     Return json properly that matches the Provided Schema.
     """
 
@@ -46,6 +46,8 @@ if not doc_ops.is_digital_native(pdf_path = pdf_path):
 
     doc = InvoiceModel.model_validate_json(response.text)
     print(doc.model_dump())
+    doc_details = doc.model_dump()
 else :
     pass # if pdf is digital then save cost of api and go by traditional way.
 
+doc_ops.get_annotated_doc(doc_details, pdf_path)

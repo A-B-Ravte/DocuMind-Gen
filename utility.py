@@ -10,24 +10,37 @@ class DocOperation():
                 return True # Has text, likely native
         return False # No fonts, likely scanned
     
-    def get_annotated_doc(self, page_no, box, document):
+    def get_annotated_doc(self, doc_details, document):
         doc = fitz.open(document)
-        if not box or box==[0,0,0,0]:
-            return
-        
-        page = doc[page_no - 1]
-        x, y, x1, y1 = box
+        for key, mapping in doc_details.items():
+            print("mapping is", mapping["BoundingBox"])
+            #continue
+            box = mapping["BoundingBox"]
+            page_no = mapping["Page_No"]   
 
-        r = page.rect
+            if not box or box == [0,0,0,0]:
+                continue
 
-        rect = fitz.Rect(
-            (x/1000) * r.width,
-            (y/1000) * r.height,
-            (x1/1000) * r.width,
-            (y1/1000) * r.height
-        )
+            
+            if not box or box==[0,0,0,0]:
+                return
+            
+            page = doc[page_no - 1]
+            x, y, x1, y1 = box
 
-        page.draw_rect(rect, color=(1,0,0), width=2)
+            r = page.rect
+
+            rect = fitz.Rect(
+                (x/1000) * r.width,
+                (y/1000) * r.height,
+                (x1/1000) * r.width,
+                (y1/1000) * r.height
+            )
+
+            page.draw_rect(rect, color=(1,0,0), width=2)
+
+        doc.save('Anotated.pdf')
+        doc.close()    
     
 
 if __name__=="__main__":
