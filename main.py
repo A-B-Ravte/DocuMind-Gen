@@ -8,14 +8,14 @@ doc_ops = DocOperation()
 load_dotenv()
 
 class Fields(BaseModel):
-    BoundingBox : list[int] = Field(..., description="Get Bounding box of where the information found.")
+    BoundingBox : list[int] = Field(..., description="Get Bounding box of where the information found [y-min,x-min,y-max,x-max]")
     Page_No : int = Field(..., description="Get page number where there information found")
 
 class NameField(Fields):
-    value : str = Field(..., description="Search for Name provided at the start of document.")
+    value : str = Field(..., description="The recipient's Name found in the form body, Name is above the Address")
 
 class AddressField(Fields):
-    value : str = Field(..., description="Address provided at the start below the Name.")
+    value : str = Field(..., description="The recipient's address found in the form body, NOT the sender's address in the header.")
     
 class InvoiceModel(BaseModel):
     Name : NameField
@@ -28,9 +28,11 @@ if not doc_ops.is_digital_native(pdf_path = pdf_path):
     client = genai.Client()
 
     prompt = """"
-    Extract the multi page document and get the Name and Address fields, 
-    Document provided can have single page or multiple page both in jpg, jpeg, png or pdf formats
-    Return json properly that matches the Provided Schema.
+    Extract Name and Address with there BoundingBox and page number, For BoundingBox, provide [ymin, xmin, ymax, xmax], 
+    where the top-left is [0,0] and bottom-right is [1000,1000]. 
+    Ensure the box tightly surrounds the specific text value.
+    Consider multiple page extraction from pdf.
+    Extract and give each page name and address and provide page number and bounding box for each.
     """
 
     document = client.files.upload(file = pdf_path)

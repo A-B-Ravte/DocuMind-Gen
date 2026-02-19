@@ -26,18 +26,18 @@ class DocOperation():
                 return
             
             page = doc[page_no - 1]
-            x, y, x1, y1 = box
+            y, x, y1, x1 = box
 
             r = page.rect
 
             rect = fitz.Rect(
                 (x/1000) * r.width,
-                (y/1000) * r.height,
+                (y/1000) * r.height - 2,
                 (x1/1000) * r.width,
                 (y1/1000) * r.height
             )
 
-            page.draw_rect(rect, color=(1,0,0), width=2)
+            page.draw_rect(rect, color=(1,0,0), width=1)
 
         doc.save('Anotated.pdf')
         doc.close()    
