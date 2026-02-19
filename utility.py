@@ -15,4 +15,4 @@ if __name__=="__main__":
     ops = DocOperation()
     is_digital = ops.is_digital_native(pdf_path)
 
-    print(is_digital)
+    
