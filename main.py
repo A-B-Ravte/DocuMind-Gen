@@ -5,7 +5,7 @@ from pydantic import BaseModel, Field
 
 load_dotenv()
 
-client = genai.Client(api_key=os.getenv('Gemini-Flash'))
+client = genai.Client()
 
 prompt = "hello whats the data and time today."
 
