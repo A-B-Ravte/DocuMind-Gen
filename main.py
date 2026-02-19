@@ -45,6 +45,8 @@ if not doc_ops.is_digital_native(pdf_path = pdf_path):
         }
 
     )
+    
+    client.files.delete(name=document.name)
 
     doc = InvoiceModel.model_validate_json(response.text)
     print(doc.model_dump())
