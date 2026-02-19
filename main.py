@@ -22,7 +22,7 @@ class InvoiceModel(BaseModel):
     Address : AddressField
     
 
-pdf_path = r'D:\aakash\SwitchFocus\Own_Project\DocuMind-Gen\Sample-Doc\7. Indra Engineering.pdf'
+pdf_path = r'D:\aakash\SwitchFocus\Own_Project\DocuMind-Gen\Sample-Doc\alfa.pdf'
 
 if not doc_ops.is_digital_native(pdf_path = pdf_path):
     client = genai.Client()

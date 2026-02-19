@@ -32,7 +32,7 @@ class DocOperation():
 
             rect = fitz.Rect(
                 (x/1000) * r.width,
-                (y/1000) * r.height - 2,
+                (y/1000) * r.height - 3,
                 (x1/1000) * r.width,
                 (y1/1000) * r.height
             )
