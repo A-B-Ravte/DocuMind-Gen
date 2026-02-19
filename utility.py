@@ -38,6 +38,7 @@ class DocOperation():
             )
 
             page.draw_rect(rect, color=(1,0,0), width=1)
+            page.insert_text((rect.x0, rect.y0 - 5), key, color=(1, 0, 0), fontsize=8)
 
         doc.save('Anotated.pdf')
         doc.close()    
