@@ -1,0 +1,41 @@
+# Supported providers for phase 2
+SUPPORTED_PROVIDERS = ["gemini"]
+
+# Default Gemini model for phase 2
+DEFAULT_PROVIDER = "gemini"
+DEFAULT_MODEL_NAME = "gemini-2.5-flash"
+
+# Execution status values
+EXECUTION_STATUS_CREATED = "created"
+EXECUTION_STATUS_RUNNING = "running"
+EXECUTION_STATUS_COMPLETED = "completed"
+EXECUTION_STATUS_FAILED = "failed"
+
+EXECUTION_STATUSES = [
+    EXECUTION_STATUS_CREATED,
+    EXECUTION_STATUS_RUNNING,
+    EXECUTION_STATUS_COMPLETED,
+    EXECUTION_STATUS_FAILED,
+]
+
+# Document status values
+DOCUMENT_STATUS_PENDING = "pending"
+DOCUMENT_STATUS_PROCESSING = "processing"
+DOCUMENT_STATUS_COMPLETED = "completed"
+DOCUMENT_STATUS_FAILED = "failed"
+
+DOCUMENT_STATUSES = [
+    DOCUMENT_STATUS_PENDING,
+    DOCUMENT_STATUS_PROCESSING,
+    DOCUMENT_STATUS_COMPLETED,
+    DOCUMENT_STATUS_FAILED,
+]
+
+# File names used inside output folders
+RESULT_JSON_FILENAME = "result.json"
+ANNOTATED_PDF_FILENAME = "annotated.pdf"
+
+# ID prefixes
+CONFIG_ID_PREFIX = "config"
+EXECUTION_ID_PREFIX = "exec"
+DOCUMENT_ID_PREFIX = "doc"

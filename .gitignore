@@ -20,6 +20,7 @@ outputs/
 
 #sample documents
 Sample-Doc/
+backup/
 
 # IDE
 .vscode/
