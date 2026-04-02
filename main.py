@@ -50,7 +50,7 @@ if not doc_ops.is_digital_native(pdf_path = pdf_path):
     
     client.files.delete(name=document.name)
     '''
-    # Read the file as bytes
+    # Read the file as bytes for testing purpose will use above code in production.
     file_path = pathlib.Path(pdf_path)
     file_data = file_path.read_bytes()
 
