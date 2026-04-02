@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
-from app.api.routes import config_handling, doc_handling
+from app.api.routes import config_handling, doc_handling, execution_handling
 from app.core.paths import STATIC_DIR, ensure_directories
 from app.core.settings import settings
 
@@ -17,6 +17,7 @@ app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 app.include_router(config_handling.router)
 app.include_router(doc_handling.router)
+app.include_router(execution_handling.router)
 
 
 @app.get("/")

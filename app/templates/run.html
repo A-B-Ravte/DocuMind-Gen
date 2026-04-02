@@ -40,6 +40,7 @@
                 <th>Overall Status</th>
                 <th>Started At</th>
                 <th>Documents</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -58,6 +59,15 @@
                             {{ doc.status }}
                         </div>
                     {% endfor %}
+                </td>
+                <td>
+                    <form action="/execution/run/{{ execution.execution_id }}" method="post" style="margin-bottom: 8px;">
+                        <button type="submit">Run</button>
+                    </form>
+
+                    <a href="/execution/{{ execution.execution_id }}" target="_blank">Status</a>
+                    <br>
+                    <a href="/execution/{{ execution.execution_id }}/results" target="_blank">Results</a>
                 </td>
             </tr>
             {% endfor %}
