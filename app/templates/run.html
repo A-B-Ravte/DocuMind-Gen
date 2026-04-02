@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Upload Documents</h2>
+
+<form action="/docs/upload" method="post" enctype="multipart/form-data">
+    <div>
+        <label for="config_id">Select Configuration:</label>
+        <select id="config_id" name="config_id" required>
+            <option value="">-- Select Configuration --</option>
+            {% for config in configurations %}
+                <option value="{{ config.config_id }}">
+                    {{ config.config_id }} | {{ config.config_name }} | {{ config.document_type }}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div>
+        <label for="files">Upload PDF/Documents:</label>
+        <input type="file" id="files" name="files" multiple required>
+    </div>
+
+    <div style="margin-top: 16px;">
+        <button type="submit">Upload Documents</button>
+    </div>
+</form>
+
+<hr>
+
+<h2>Executions</h2>
+
+{% if executions %}
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Execution ID</th>
+                <th>Config ID</th>
+                <th>Config Name</th>
+                <th>Overall Status</th>
+                <th>Started At</th>
+                <th>Documents</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for execution in executions %}
+            <tr>
+                <td>{{ execution.execution_id }}</td>
+                <td>{{ execution.config_id }}</td>
+                <td>{{ execution.config_name }}</td>
+                <td>{{ execution.overall_status }}</td>
+                <td>{{ execution.started_at }}</td>
+                <td>
+                    {% for doc in execution.documents %}
+                        <div>
+                            <strong>{{ doc.doc_id }}</strong> |
+                            {{ doc.doc_name }} |
+                            {{ doc.status }}
+                        </div>
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No executions created yet.</p>
+{% endif %}
+{% endblock %}

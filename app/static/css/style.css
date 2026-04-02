@@ -1,0 +1,56 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f7f7f7;
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 20px auto;
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 8px;
+}
+
+h1, h2, h3 {
+    color: #222;
+}
+
+form div {
+    margin-bottom: 12px;
+}
+
+input, select, button {
+    padding: 8px;
+    margin-top: 4px;
+    margin-right: 8px;
+}
+
+button {
+    cursor: pointer;
+}
+
+table {
+    width: 100%;
+    background: white;
+    border-collapse: collapse;
+}
+
+th {
+    background: #efefef;
+}
+
+nav a {
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+hr {
+    margin: 20px 0;
+}
+
+select {
+    min-width: 320px;
+}
